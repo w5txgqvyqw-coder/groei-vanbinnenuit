@@ -34,9 +34,13 @@
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
     .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 3rem; }
     .hero-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.75); font-size: 0.8rem; padding: 0.35rem 0.9rem; border-radius: 99px; }
+    .hero-filosofie { color: rgba(255,255,255,0.62); font-size: 0.95rem; max-width: 500px; margin: 1.4rem 0 2rem; line-height: 1.75; font-style: italic; border-left: 2px solid rgba(240,196,41,0.4); padding-left: 1.2rem; }
+    .hero-scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.4); font-size: 0.78rem; letter-spacing: 0.08em; text-decoration: none; transition: color 0.2s; animation: bounce 2.5s infinite; z-index: 10; white-space: nowrap; }
+    .hero-scroll-indicator:hover { color: rgba(255,255,255,0.75); }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
     .hero-right { position: relative; overflow: hidden; }
-    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, #1a3a5c 0%, transparent 30%), linear-gradient(to top, #1a3a5c 0%, transparent 25%); }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, #1a3a5c 0%, transparent 30%), linear-gradient(to top, #1a3a5c 0%, transparent 20%); }
 
     .btn-primary { background: var(--gold); color: var(--navy); padding: 0.9rem 2.1rem; border-radius: 8px; font-weight: 700; font-size: 0.98rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(240,196,41,0.4); }
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(240,196,41,0.55); }
@@ -263,12 +267,17 @@
     <p class="hero-eyebrow">Harold Meeuwsen · Coach &amp; Teamcoach</p>
     <h1 class="hero-title">Echte verandering<span class="hero-title-accent">komt van binnenuit.</span></h1>
     <p class="hero-sub">Of je nu vastloopt in je loopbaan, als team niet vooruitkomt of als leider meer impact wilt maken. Ik help je bewegen op de manier die bij jou past. Niet aan de oppervlakte, maar daar waar het echt begint.</p>
+    <p class="hero-filosofie">Een boom groeit niet door harder aan de takken te trekken. Hij groeit omdat de wortels gezond zijn.<br><br>Dat geldt voor mensen, teams en leiders. Echte verandering begint niet bij gedrag, technieken of nieuwe afspraken. Die beginnen bij wat er onder de oppervlakte speelt. Bij patronen, loyaliteiten en dynamieken die vaak onzichtbaar zijn, maar alles bepalen.<br><br>Daar werk ik. Van binnenuit.</p>
     <div class="hero-actions">
       <a href="#kennismaking" class="btn-primary">Vrijblijvende kennismaking</a>
       <a href="#diensten" class="btn-outline">Bekijk diensten</a>
     </div>
   </div>
-  <div class="hero-right"><img src="Boom_website.png" alt="Groei van binnenuit" style="object-position:center bottom;" /></div>
+  <div class="hero-right"><img src="Boom_website.png" alt="Groei van binnenuit" style="object-position:center center;" /></div>
+  <a href="#diensten" class="hero-scroll-indicator">
+    <span>Kijk wat er onder de oppervlakte zit</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </a>
 </section>
 
 
