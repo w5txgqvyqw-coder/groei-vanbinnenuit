@@ -88,6 +88,10 @@
     .dienst-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1.3rem; font-size: 0.88rem; font-weight: 700; text-decoration: none; color: var(--teal); transition: gap 0.2s; }
     .dienst-link:hover { gap: 0.6rem; }
     a.dienst-card { text-decoration: none; color: inherit; display: block; cursor: pointer; }
+    .dienst-accent-teal { color: var(--teal); font-style: italic; }
+    .dienst-accent-green { color: var(--green2); font-style: italic; }
+    .dienst-accent-navy { color: var(--navy); font-style: italic; }
+    .dienst-accent-gold { color: #c9a200; font-style: italic; }
 
     #loopbaan-intro { background: linear-gradient(135deg, #0f2540 0%, #1a3a5c 60%, #1d4f6e 100%); padding: 0; position: relative; overflow: hidden; }
     #loopbaan-intro::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(45,122,111,0.2) 0%, transparent 60%); }
@@ -263,38 +267,10 @@
       <a href="#kennismaking" class="btn-primary">Vrijblijvende kennismaking</a>
       <a href="#diensten" class="btn-outline">Bekijk diensten</a>
     </div>
-    <div class="hero-tags">
-      <span class="hero-tag">Coach</span><span class="hero-tag">Teamcoach</span><span class="hero-tag">Loopbaancoach</span><span class="hero-tag">Leiderschapsprogramma</span>
-    </div>
-    <div class="hero-tags" style="margin-top:0.5rem;">
-      <span class="hero-tag">Leger</span><span class="hero-tag">Zorg</span><span class="hero-tag">Consultancy</span><span class="hero-tag">Leiderschap</span>
-    </div>
   </div>
   <div class="hero-right"><img src="Boom_website.png" alt="Groei van binnenuit" style="object-position:center bottom;" /></div>
 </section>
 
-<div id="stats">
-  <div class="stats-grid">
-    <div class="stat-item"><div class="stat-num">52u</div><div class="stat-label">Gelaagde Leider programma</div></div>
-    <div class="stat-item"><div class="stat-num">10w</div><div class="stat-label">Loopbaantraject duur</div></div>
-    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Diensten op maat</div></div>
-    <div class="stat-item"><div class="stat-num">🌍</div><div class="stat-label">Landelijk werkzaam</div></div>
-  </div>
-</div>
-
-<section id="voor-wie">
-  <div class="container">
-    <p class="section-label">Voor jou als je…</p>
-    <h2 class="section-title">Midden in een verandering staat</h2>
-    <p class="section-lead">…in een loopbaantransitie zit, wil begrijpen wat je echt drijft, of wil weten wat jouw volgende juiste stap is.</p>
-    <div class="voor-wie-grid">
-      <div class="voor-wie-card c1"><div class="vwc-icon">🔄</div><h3>Loopbaantransitie</h3><p>Je staat op een kruispunt en wilt de volgende stap bewust zetten — niet zomaar de eerste de beste.</p></div>
-      <div class="voor-wie-card c2"><div class="vwc-icon">🌱</div><h3>Persoonlijke groei</h3><p>Je wilt beter begrijpen wat je drijft, wat energie geeft en wat je tegenhoudt.</p></div>
-      <div class="voor-wie-card c3"><div class="vwc-icon">👥</div><h3>Teamontwikkeling</h3><p>Je wilt als team beter samenwerken, patronen doorbreken en gezamenlijk groeien.</p></div>
-      <div class="voor-wie-card c4"><div class="vwc-icon">🧭</div><h3>Leiderschap</h3><p>Je wilt als teamleider of manager groeien en jouw rol bewuster en effectiever invullen.</p></div>
-    </div>
-  </div>
-</section>
 
 <section id="diensten">
   <div class="container">
@@ -302,108 +278,15 @@
     <h2 class="section-title">Diensten</h2>
     <p class="section-lead">Altijd een vrijblijvende kennismaking. Daarna spreken we samen af wat past — een strippenkaart, een traject of een maatwerkprogramma.</p>
     <div class="diensten-grid">
-      <a href="coaching.html" class="dienst-card c1"><div class="dienst-icon">🧠</div><h3>Groei van binnenuit. Voor jou.</h3><p>Persoonlijke begeleiding waarbij jij als mens centraal staat. Patronen herkennen, energie en blokkades in kaart brengen. Flexibel via strippenkaart.</p><span class="dienst-link">Lees meer →</span></a>
-      <a href="teamcoaching.html" class="dienst-card c2"><div class="dienst-icon">👥</div><h3>Groei van binnenuit. Voor teams.</h3><p>Begeleiding van teams die vastlopen, in verandering zijn of verder willen groeien. Systemische aanpak: niet alleen symptomen aanpakken, maar het geheel versterken.</p><span class="dienst-link">Lees meer →</span></a>
-      <a href="#loopbaan-intro" class="dienst-card c3"><div class="dienst-icon">🧭</div><h3>Groei van binnenuit. Voor loopbaan.</h3><p>Intensief traject voor professionals in transitie. Van verkenning van wie je bent tot actief solliciteren en begeleiding bij de landing in je nieuwe rol.</p><span class="dienst-link">Bekijk het traject →</span></a>
-      <a href="gelaagde-leider.html" class="dienst-card c4"><div class="dienst-icon">🏆</div><h3>Groei van binnenuit. Voor de leider.</h3><p>Een intensief leiderschapsprogramma van 52 uur, 16 weken en 5 fasen. Voor leiders die merken dat effectief leidinggeven vraagt om meer dan sturen op wat zichtbaar is.</p><span class="dienst-link">Bekijk het programma →</span></a>
+      <a href="coaching.html" class="dienst-card c1"><div class="dienst-icon">🧠</div><h3>Groei van binnenuit. Voor <span class="dienst-accent-teal">jou</span>.</h3><p>Persoonlijke begeleiding waarbij jij als mens centraal staat. Patronen herkennen, energie en blokkades in kaart brengen. Flexibel via strippenkaart.</p><span class="dienst-link">Lees meer →</span></a>
+      <a href="teamcoaching.html" class="dienst-card c2"><div class="dienst-icon">👥</div><h3>Groei van binnenuit. Voor <span class="dienst-accent-green">teams</span>.</h3><p>Begeleiding van teams die vastlopen, in verandering zijn of verder willen groeien. Systemische aanpak: niet alleen symptomen aanpakken, maar het geheel versterken.</p><span class="dienst-link">Lees meer →</span></a>
+      <a href="loopbaancoaching.html" class="dienst-card c3"><div class="dienst-icon">🧭</div><h3>Groei van binnenuit. Voor <span class="dienst-accent-navy">loopbaan</span>.</h3><p>Intensief traject voor professionals in transitie. Van verkenning van wie je bent tot actief solliciteren en begeleiding bij de landing in je nieuwe rol.</p><span class="dienst-link">Bekijk het traject →</span></a>
+      <a href="gelaagde-leider.html" class="dienst-card c4"><div class="dienst-icon">🏆</div><h3>Groei van binnenuit. Voor <span class="dienst-accent-gold">de leider</span>.</h3><p>Een intensief leiderschapsprogramma van 52 uur, 16 weken en 5 fasen. Voor leiders die merken dat effectief leidinggeven vraagt om meer dan sturen op wat zichtbaar is.</p><span class="dienst-link">Bekijk het programma →</span></a>
     </div>
   </div>
 </section>
 
-<section id="loopbaan-intro" style="padding:0;">
-  <div class="loopbaan-intro-inner">
-    <div class="loopbaan-intro-text">
-      <p class="section-label">Loopbaancoaching</p>
-      <h2 class="section-title" style="color:#fff;">Van transitie naar landing</h2>
-      <p class="section-lead">Een intensief traject van 10 weken waarin we samen jouw loopbaanverhaal schrijven — van wie je bent tot de baan die bij je past. Inclusief een unieke <strong style="color:var(--gold);">LoopbaanAI analyse</strong> die jouw rode draad en profiel scherp in beeld brengt.</p>
-      <a href="#loopbaan" class="btn-primary">Bekijk het volledige traject</a>
-    </div>
-    <div class="loopbaan-intro-img"><img src="LoopbaanAI-tool.jpg" alt="LoopbaanAI analyse tool" /></div>
-  </div>
-</section>
 
-<section id="loopbaanai" style="padding:5rem 2rem;">
-  <div class="loopbaanai-inner">
-    <div>
-      <div class="ai-label">LoopbaanAI · Uniek onderdeel</div>
-      <h2>Jouw rode draad, scherp in beeld</h2>
-      <p>De LoopbaanAI analyse is een bijzonder onderdeel van het loopbaantraject. Jij voert in, ik lees mee. Samen brengen we je archetypen, rolprofiel en drijfveren scherp in beeld — zodat je niet gaat zoeken naar een baan, maar naar <em>jouw</em> baan.</p>
-      <p>De uitkomst is een gedetailleerd profiel met hypotheses die jij vervolgens toetst in gesprek, in het netwerk en in sollicitatiegesprekken.</p>
-      <div class="ai-features">
-        <div class="ai-feature"><div class="ai-feature-icon">🎯</div><div><h4>Archetypen &amp; rolprofiel</h4><p>Inzicht in wie je bent en wat je écht drijft, gebaseerd op jouw verhalen en patronen.</p></div></div>
-        <div class="ai-feature"><div class="ai-feature-icon">🔴</div><div><h4>Rode draad helder</h4><p>Wat loopt er door al jouw werkervaring heen? We maken het zichtbaar en voelbaar.</p></div></div>
-        <div class="ai-feature"><div class="ai-feature-icon">💡</div><div><h4>Hypotheses om te toetsen</h4><p>Gerichte aannames die je actief kunt testen — in gesprekken, op LinkedIn en bij werkgevers.</p></div></div>
-      </div>
-    </div>
-    <div style="display:flex; flex-direction:column; gap:1.5rem;">
-      <div style="position:relative;">
-        <p style="color:rgba(255,255,255,0.45); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.8rem;">De LoopbaanAI tool</p>
-        <img src="LoopbaanAI-tool.jpg" alt="LoopbaanAI analyse tool" style="width:100%; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.5); display:block;" />
-      </div>
-      <div>
-        <p style="color:rgba(255,255,255,0.45); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.8rem;">Jouw persoonlijk dashboard</p>
-        <img src="LoopbaanAI_Dashboard_Preview.png" alt="LoopbaanAI dashboard met voortgang en reflecties" style="width:100%; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.5); display:block;" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="loopbaan">
-  <div class="container">
-    <p class="section-label">Wat je krijgt</p>
-    <h2 class="section-title">Alles voor een succesvolle transitie</h2>
-    <div class="loopbaan-wat">
-      <div class="loopbaan-wat-item"><h4>🎯 Persoonlijke coaching</h4><p>Aandacht voor jou als mens. Patronen herkennen, wat geeft energie, wat houdt je tegen.</p></div>
-      <div class="loopbaan-wat-item accent"><h4>🤖 LoopbaanAI analyse</h4><p>Je rode draad, archetypen en rolprofiel scherp in beeld. Hypotheses die jij toetst.</p></div>
-      <div class="loopbaan-wat-item accent-green"><h4>📋 Dashboard op maat</h4><p>Voortgang, doelstellingen, sollicitaties en reflecties altijd inzichtelijk.</p></div>
-      <div class="loopbaan-wat-item accent"><h4>💬 Wekelijkse check-ins</h4><p>Korte online sessies voor voorbereiding, actuele vragen of sollicitatietraining.</p></div>
-      <div class="loopbaan-wat-item"><h4>📍 Coaching op locatie</h4><p>10 sessies van 60 min, persoonlijk en op een vaste plek.</p></div>
-      <div class="loopbaan-wat-item accent-green"><h4>🚀 Begeleiding tot landing</h4><p>Resterende sessies na een nieuwe baan? Gebruik ze voor een succesvolle start.</p></div>
-    </div>
-    <div class="investering-grid">
-      <div class="investering-card"><label>Privébetaler</label><div class="prijs">€ 2.750</div><p class="prijs-sub">Betaling in twee termijnen mogelijk</p></div>
-      <div class="investering-card featured"><label>Via werkgever / outplacement</label><div class="prijs">€ 3.500</div><p class="prijs-sub">Ontwikkelbudget of outplacement, op factuur</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="traject">
-  <div class="container">
-    <p class="section-label">Hoe het traject eruitziet</p>
-    <h2 class="section-title">Stap voor stap naar jouw landing</h2>
-    <div class="traject-steps">
-      <div class="traject-step"><div class="tst-dot s1">1</div><div class="tst-body"><h3>Verkenning</h3><p>Je loopbaanverhaal, patronen en wat je echt zoekt. Doelstellingen voor het traject vastleggen.</p><div class="tst-week">Week 1–2</div></div></div>
-      <div class="traject-step"><div class="tst-dot sai">AI</div><div class="tst-body" style="border-left-color:var(--teal2); background:#f0faf8;"><div class="ai-badge-inline">✦ LoopbaanAI analyse</div><h3>AI-analyse &amp; profiel</h3><p>Jij voert in, Harold leest mee. Je rode draad en profiel scherp in beeld — archetypen, drijfveren, hypotheses.</p><div class="tst-week">Tussen week 2–3</div></div></div>
-      <div class="traject-step"><div class="tst-dot s2">2</div><div class="tst-body"><h3>Verdieping</h3><p>Rapport doorlopen, profiel valideren. Wat klopt, wat verrast, wat stel je bij?</p><div class="tst-week">Week 3–4</div></div></div>
-      <div class="traject-step"><div class="tst-dot s3">3</div><div class="tst-body"><h3>Actie &amp; momentum</h3><p>Positionering, LinkedIn, netwerk, solliciteren. Wekelijkse check-ins houden je op koers.</p><div class="tst-week">Week 5–8</div></div></div>
-      <div class="traject-step"><div class="tst-dot s4">4</div><div class="tst-body"><h3>Landing</h3><p>Afronden, evalueren en begeleid starten in je nieuwe rol. Het traject stopt niet bij het tekenen.</p><div class="tst-week">Week 9–10</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="gelaagde-leider">
-  <div class="container">
-    <div class="gl-header">
-      <div>
-        <p class="section-label">Leergang Coachend Leiderschap</p>
-        <h2 class="section-title">De Gelaagde Leider</h2>
-        <p class="section-lead">Deze leergang ondersteunt leidinggevenden in het ontwikkelen van <strong>coachend leiderschap</strong> dat recht doet aan de samenhang tussen organisatie, team en individu.</p>
-        <p style="color:var(--muted); font-size:0.97rem; line-height:1.75; margin-bottom:1.5rem;">De leergang is bedoeld voor leiders die merken dat effectief leidinggeven vraagt om aandacht voor wat zichtbaar is én voor wat <em>onder de oppervlakte</em> meespeelt. Een systemische aanpak op meerdere lagen, met impact — gespreid over <strong>52 uur</strong> en 16 weken in 5 fasen.</p>
-        <div class="gl-badges">
-          <span class="gl-badge">52 uur programma</span><span class="gl-badge">16 weken</span><span class="gl-badge">5 fasen</span><span class="gl-badge">Dagdelen &amp; 1-op-1</span><span class="gl-badge">Systemische aanpak</span><span class="gl-badge">Op maat</span>
-        </div>
-        <div style="margin-top:2rem;"><a href="#kennismaking" class="btn-teal">Vrijblijvend kennismaken</a></div>
-      </div>
-    </div>
-    <div class="fasen-row">
-      <div class="fase-card f1"><div class="fase-icon">📁</div><div class="fase-badge">Fase 1</div><h4>Oriëntatie &amp; Diagnose</h4><p class="fase-meta">Week 1–2<br/>2 dagdelen</p></div>
-      <div class="fase-card f2"><div class="fase-icon">⚖️</div><div class="fase-badge">Fase 2</div><h4>Richting &amp; Positionering</h4><p class="fase-meta">Week 3–4<br/>2 dagdelen</p></div>
-      <div class="fase-card f3"><div class="fase-icon">📈</div><div class="fase-badge">Fase 3</div><h4>Teamontwikkeling</h4><p class="fase-meta">Week 5–9<br/>4 dagdelen</p></div>
-      <div class="fase-card f4"><div class="fase-icon">✅</div><div class="fase-badge">Fase 4</div><h4>Persoonlijk Leiderschap</h4><p class="fase-meta">Week 2–12<br/>12 uur</p></div>
-      <div class="fase-card f5"><div class="fase-icon">📋</div><div class="fase-badge">Fase 5</div><h4>Borging</h4><p class="fase-meta">Week 10–16<br/>2 dagdelen</p></div>
-    </div>
-  </div>
-</section>
 
 <section id="over" style="padding:0;">
   <div class="over-inner">
@@ -460,7 +343,7 @@
         <div><label>Uw naam</label><input type="text" placeholder="Uw volledige naam" required /></div>
         <div><label>E-mailadres</label><input type="email" placeholder="uw@email.nl" required /></div>
         <div><label>Waarvoor wilt u een kennismaking?</label>
-          <select><option value="" disabled selected>Kies een dienst</option><option>Individuele coaching</option><option>Teamcoaching / teamsessies</option><option>Adviestraject leren &amp; ontwikkelen</option><option>De Gelaagde Leider (teamleiders)</option><option>Loopbaancoaching (incl. LoopbaanAI)</option><option>Anders / nader te bespreken</option></select>
+          <select><option value="" disabled selected>Kies een dienst</option><option>Groei van binnenuit. Voor jou.</option><option>Groei van binnenuit. Voor teams.</option><option>Groei van binnenuit. Voor loopbaan.</option><option>Groei van binnenuit. Voor de leider.</option><option>Anders / nader te bespreken</option></select>
         </div>
         <div><label>Uw bericht (optioneel)</label><textarea placeholder="Vertel kort wat u bezighoudt…"></textarea></div>
         <button type="submit">Verstuur bericht ✦</button>
