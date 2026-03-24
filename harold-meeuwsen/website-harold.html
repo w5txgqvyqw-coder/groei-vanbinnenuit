@@ -224,24 +224,32 @@
     form button:hover { background: var(--teal); transform: translateY(-2px); }
 
     #testimonials { background: var(--light); }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; margin-top: 1rem; }
-    .testimonial-card { background: #fff; border-radius: 18px; padding: 2rem 1.8rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); position: relative; display: flex; flex-direction: column; gap: 1.2rem; border-top: 4px solid var(--teal); }
+    .carousel-wrap { position: relative; margin-top: 1rem; }
+    .carousel-viewport { overflow: hidden; border-radius: 20px; }
+    .carousel-track { display: flex; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+    .testimonial-card { background: #fff; border-radius: 18px; padding: 2rem 1.8rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 1.2rem; border-top: 4px solid var(--teal); flex: 0 0 calc(50% - 0.9rem); margin-right: 1.8rem; }
     .testimonial-card:nth-child(2) { border-top-color: var(--gold); }
     .testimonial-card:nth-child(3) { border-top-color: var(--navy); }
     .testimonial-card:nth-child(4) { border-top-color: #8ab840; }
     .testimonial-quote { font-size: 0.97rem; color: var(--text); line-height: 1.75; font-style: italic; flex: 1; }
-    .testimonial-quote::before { content: '\201C'; font-size: 2.5rem; color: var(--teal); line-height: 0; vertical-align: -0.5rem; margin-right: 0.2rem; font-style: normal; }
+    .testimonial-quote::before { content: '\201C'; font-size: 2.8rem; color: var(--teal); line-height: 0; vertical-align: -0.6rem; margin-right: 0.15rem; font-style: normal; }
     .testimonial-card:nth-child(2) .testimonial-quote::before { color: var(--gold); }
     .testimonial-card:nth-child(3) .testimonial-quote::before { color: var(--navy); }
+    .testimonial-card:nth-child(4) .testimonial-quote::before { color: #8ab840; }
     .testimonial-author { display: flex; align-items: center; gap: 0.8rem; border-top: 1px solid var(--border); padding-top: 1rem; }
     .testimonial-initials { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; flex-shrink: 0; }
     .testimonial-card:nth-child(2) .testimonial-initials { background: var(--gold); color: var(--navy); }
     .testimonial-card:nth-child(3) .testimonial-initials { background: var(--teal); }
     .testimonial-card:nth-child(4) .testimonial-initials { background: #8ab840; }
-    .testimonial-card:nth-child(4) .testimonial-quote::before { color: #8ab840; }
     .testimonial-name { font-weight: 800; font-size: 0.9rem; color: var(--navy); }
     .testimonial-role { font-size: 0.8rem; color: var(--muted); }
-    @media (max-width: 760px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .carousel-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
+    .carousel-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border); background: #fff; color: var(--navy); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 1.1rem; }
+    .carousel-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .carousel-dots { display: flex; gap: 0.5rem; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; padding: 0; }
+    .carousel-dot.active { background: var(--teal); transform: scale(1.3); }
+    @media (max-width: 760px) { .testimonial-card { flex: 0 0 100%; margin-right: 1.8rem; } }
 
     footer { background: #0d2035; color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.85rem; }
     footer strong { color: rgba(255,255,255,0.9); }
@@ -322,46 +330,43 @@
     <p class="section-label">Wat klanten zeggen</p>
     <h2 class="section-title">Ervaringen</h2>
     <p class="section-lead">Wat het verschil maakt, hoor je het beste van degenen die het zelf hebben meegemaakt.</p>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <p class="testimonial-quote">Harold durft zijn eigen persoonlijkheid en ervaringen in de gesprekken te stoppen. Hij luistert en observeert goed en kan die observaties heel mooi verwoorden. Bovendien is hij daarbij niet dwingend of sturend, waardoor het als een samenwerking voelt. En hij zorgt heel goed voor een veilige, vertrouwde sfeer.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-initials">J</div>
-          <div>
-            <div class="testimonial-name">John</div>
-            <div class="testimonial-role">Individuele coaching</div>
+    <div class="carousel-wrap" id="testimonialCarousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Harold durft zijn eigen persoonlijkheid en ervaringen in de gesprekken te stoppen. Hij luistert en observeert goed en kan die observaties heel mooi verwoorden. Bovendien is hij daarbij niet dwingend of sturend, waardoor het als een samenwerking voelt. En hij zorgt heel goed voor een veilige, vertrouwde sfeer.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-initials">J</div>
+              <div><div class="testimonial-name">John</div><div class="testimonial-role">Individuele coaching</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Harold was zeer aandachtig, rustig en scherp. Hij raakte me op de juiste momenten met goede observaties.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-initials">R</div>
+              <div><div class="testimonial-name">Ron</div><div class="testimonial-role">Individuele coaching</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Harold bracht me uit evenwicht — maar dat was precies wat ik nodig had. Door zijn scherpe observaties en gerichte vragen kreeg ik mijn patronen beter in beeld. Ik ontdekte waar ik kon groeien en wist opeens weer welke kant ik op wilde.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-initials">S</div>
+              <div><div class="testimonial-name">Sjan</div><div class="testimonial-role">Individuele coaching</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">Harold heeft mijn team laten confronteren met wat er echt speelde en waar we van een goed team naar een high performance team konden gaan. Door verschillende interventies hebben we dit boven tafel kunnen krijgen en zijn we met elkaar aan de slag gegaan. Mijn team is weer in beweging!</p>
+            <div class="testimonial-author">
+              <div class="testimonial-initials">TK</div>
+              <div><div class="testimonial-name">Team Klantondersteuning</div><div class="testimonial-role">Teamcoaching</div></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">Harold was zeer aandachtig, rustig en scherp. Hij raakte me op de juiste momenten met goede observaties.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-initials">R</div>
-          <div>
-            <div class="testimonial-name">Ron</div>
-            <div class="testimonial-role">Individuele coaching</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">Harold bracht me uit evenwicht — maar dat was precies wat ik nodig had. Door zijn scherpe observaties en gerichte vragen kreeg ik mijn patronen beter in beeld. Ik ontdekte waar ik kon groeien en wist opeens weer welke kant ik op wilde.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-initials">S</div>
-          <div>
-            <div class="testimonial-name">Sjan</div>
-            <div class="testimonial-role">Individuele coaching</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">Harold heeft mijn team laten confronteren met wat er echt speelde en waar we van een goed team naar een high performance team konden gaan. Door verschillende interventies hebben we dit boven tafel kunnen krijgen en zijn we met elkaar aan de slag gegaan. Mijn team is weer in beweging!</p>
-        <div class="testimonial-author">
-          <div class="testimonial-initials">TK</div>
-          <div>
-            <div class="testimonial-name">Team Klantondersteuning</div>
-            <div class="testimonial-role">Teamcoaching</div>
-          </div>
-        </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carouselPrev" aria-label="Vorige">&#8592;</button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" id="carouselNext" aria-label="Volgende">&#8594;</button>
       </div>
     </div>
   </div>
@@ -445,6 +450,67 @@
   function handleSubmit(e) { e.preventDefault(); document.getElementById('form-success').style.display = 'block'; e.target.reset(); }
   const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
   document.querySelectorAll('.voor-wie-card, .dienst-card, .fase-card, .traject-step, .loopbaan-wat-item, .ai-feature').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; observer.observe(el); });
+
+  // Testimonial Carousel
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.testimonial-card');
+    const isMobile = () => window.innerWidth <= 760;
+    let current = 0;
+    let autoTimer;
+
+    function perView() { return isMobile() ? 1 : 2; }
+    function totalSlides() { return Math.ceil(cards.length / perView()); }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides(); i++) {
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === current ? ' active' : '');
+        d.setAttribute('aria-label', 'Ga naar slide ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(d);
+      }
+    }
+
+    function goTo(index) {
+      current = (index + totalSlides()) % totalSlides();
+      const cardWidth = cards[0].offsetWidth + 18;
+      track.style.transform = 'translateX(-' + (current * perView() * cardWidth) + 'px)';
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    const carousel = document.getElementById('testimonialCarousel');
+    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel.addEventListener('mouseleave', resetTimer);
+
+    // Touch swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+
+    window.addEventListener('resize', () => { buildDots(); goTo(0); });
+
+    buildDots();
+    resetTimer();
+  })();
 </script>
 </body>
 </html>
