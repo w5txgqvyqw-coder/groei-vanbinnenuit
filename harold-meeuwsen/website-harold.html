@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harold Meeuwsen – Coach | Teamcoach | Loopbaancoach | groei-vanbinnenuit.nl</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a2b3c; background: #fff; line-height: 1.6; overflow-x: hidden; }
+    :root {
+      --navy: #1a3a5c; --navy2: #14304e; --teal: #2d7a6f; --teal2: #3a9b8e;
+      --green1: #8ab840; --green2: #5a8e3a; --gold: #f0c429;
+      --light: #f5f7fa; --border: #e0e6ed; --text: #334155; --muted: #64748b;
+    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(20,48,78,0.96); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 66px; box-shadow: 0 2px 20px rgba(0,0,0,0.18); }
+    .nav-logo { color: #fff; font-size: 1.1rem; font-weight: 800; text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 700 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; border-radius: 2px; }
+
+    #hero { min-height: 100vh; background: linear-gradient(125deg, #0f2540 0%, #1a3a5c 55%, #1e4d6b 100%); display: grid; grid-template-columns: 1fr 460px; align-items: stretch; padding-top: 66px; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(45,122,111,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(240,196,41,0.06) 0%, transparent 50%); pointer-events: none; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 5rem 3rem 5rem 5%; position: relative; z-index: 2; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--gold); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--gold); border-radius: 2px; }
+    h1.hero-title { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 0.3rem; }
+    .hero-title-accent { color: var(--gold); display: block; }
+    .hero-sub { color: rgba(255,255,255,0.72); font-size: 1.05rem; max-width: 500px; margin: 1.4rem 0 2.5rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 3rem; }
+    .hero-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.75); font-size: 0.8rem; padding: 0.35rem 0.9rem; border-radius: 99px; }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+    .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, #1a3a5c 0%, transparent 30%), linear-gradient(to top, #1a3a5c 0%, transparent 25%); }
+
+    .btn-primary { background: var(--gold); color: var(--navy); padding: 0.9rem 2.1rem; border-radius: 8px; font-weight: 700; font-size: 0.98rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(240,196,41,0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(240,196,41,0.55); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.4); color: #fff; padding: 0.9rem 2.1rem; border-radius: 8px; font-weight: 600; font-size: 0.98rem; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    .btn-teal { background: var(--teal); color: #fff; padding: 0.9rem 2.1rem; border-radius: 8px; font-weight: 700; font-size: 0.98rem; text-decoration: none; display: inline-block; transition: transform 0.2s, background 0.2s; }
+    .btn-teal:hover { background: var(--teal2); transform: translateY(-2px); }
+    .btn-white { background: #fff; color: var(--teal); padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    #stats { background: var(--navy); padding: 3rem 2rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    .stat-num { font-size: 2.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .stat-label { color: rgba(255,255,255,0.7); font-size: 0.88rem; margin-top: 0.4rem; }
+
+    section { padding: 5.5rem 2rem; }
+    .container { max-width: 1140px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-label::after { content: ''; flex: 1; max-width: 40px; height: 2px; background: currentColor; border-radius: 2px; }
+    h2.section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; color: var(--navy); margin-bottom: 1rem; line-height: 1.15; }
+    .section-lead { font-size: 1.05rem; color: var(--muted); max-width: 640px; margin-bottom: 3rem; line-height: 1.7; }
+
+    #voor-wie { background: var(--light); }
+    .voor-wie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+    .voor-wie-card { background: #fff; border-radius: 16px; padding: 2rem 1.8rem; box-shadow: 0 2px 16px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: transform 0.25s, box-shadow 0.25s; }
+    .voor-wie-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .voor-wie-card.c1:hover { border-color: var(--teal); }
+    .voor-wie-card.c2:hover { border-color: var(--green1); }
+    .voor-wie-card.c3:hover { border-color: var(--navy); }
+    .voor-wie-card.c4:hover { border-color: var(--gold); }
+    .vwc-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.7rem; margin-bottom: 1.2rem; }
+    .c1 .vwc-icon { background: #e8f5f3; } .c2 .vwc-icon { background: #eef6e0; } .c3 .vwc-icon { background: #e8eef5; } .c4 .vwc-icon { background: #fdf6d8; }
+    .voor-wie-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+    .voor-wie-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+
+    #diensten { background: #fff; }
+    .diensten-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; margin-top: 1rem; }
+    .dienst-card { border-radius: 18px; padding: 2.2rem; border: 1.5px solid var(--border); transition: box-shadow 0.25s, transform 0.25s; position: relative; overflow: hidden; background: #fff; }
+    .dienst-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-radius: 18px 18px 0 0; }
+    .dienst-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .dienst-card.c1::after { background: linear-gradient(90deg, var(--teal), var(--teal2)); }
+    .dienst-card.c2::after { background: linear-gradient(90deg, var(--green2), var(--green1)); }
+    .dienst-card.c3::after { background: linear-gradient(90deg, var(--navy2), var(--navy)); }
+    .dienst-card.c4::after { background: linear-gradient(90deg, #d4a520, var(--gold)); }
+    .dienst-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.3rem; }
+    .c1 .dienst-icon { background: #e0f5f2; } .c2 .dienst-icon { background: #edf7e0; } .c3 .dienst-icon { background: #e5edf5; } .c4 .dienst-icon { background: #fdf5d6; }
+    .dienst-card h3 { font-size: 1.12rem; font-weight: 800; color: var(--navy); margin-bottom: 0.6rem; }
+    .dienst-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+    .dienst-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1.3rem; font-size: 0.88rem; font-weight: 700; text-decoration: none; color: var(--teal); transition: gap 0.2s; }
+    .dienst-link:hover { gap: 0.6rem; }
+    a.dienst-card { text-decoration: none; color: inherit; display: block; cursor: pointer; }
+
+    #loopbaan-intro { background: linear-gradient(135deg, #0f2540 0%, #1a3a5c 60%, #1d4f6e 100%); padding: 0; position: relative; overflow: hidden; }
+    #loopbaan-intro::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(45,122,111,0.2) 0%, transparent 60%); }
+    .loopbaan-intro-inner { display: grid; grid-template-columns: 1fr 420px; max-width: 1140px; margin: 0 auto; position: relative; z-index: 2; }
+    .loopbaan-intro-text { padding: 5.5rem 3rem 5.5rem 2rem; }
+    .loopbaan-intro-text .section-label { color: var(--gold); }
+    .loopbaan-intro-text .section-label::after { background: var(--gold); }
+    .loopbaan-intro-text h2 { color: #fff; }
+    .loopbaan-intro-text .section-lead { color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+    .loopbaan-intro-img { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 3rem 2rem; }
+    .loopbaan-intro-img img { width: 100%; max-width: 400px; border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.4); display: block; }
+
+    #loopbaanai { background: linear-gradient(135deg, #0d2035 0%, #0f2d40 50%, #0d2035 100%); padding: 5rem 2rem; position: relative; overflow: hidden; }
+    #loopbaanai::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(58,155,142,0.18) 0%, transparent 55%); }
+    .loopbaanai-inner { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 2; }
+    .ai-label { display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(58,155,142,0.2); border: 1px solid rgba(58,155,142,0.4); color: var(--teal2); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 99px; margin-bottom: 1.2rem; }
+    .ai-label::before { content: '●'; font-size: 0.6rem; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    #loopbaanai h2 { color: #fff; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+    #loopbaanai p { color: rgba(255,255,255,0.72); font-size: 0.98rem; line-height: 1.75; margin-bottom: 1.5rem; }
+    .ai-features { display: flex; flex-direction: column; gap: 1rem; }
+    .ai-feature { display: flex; gap: 1rem; align-items: flex-start; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.2rem; transition: background 0.2s; }
+    .ai-feature:hover { background: rgba(255,255,255,0.08); border-color: rgba(58,155,142,0.4); }
+    .ai-feature-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(58,155,142,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .ai-feature h4 { color: #fff; font-size: 0.92rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .ai-feature p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin: 0; }
+    .ai-timeline-visual { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem; position: relative; }
+    .ai-timeline-visual::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal2), var(--gold)); border-radius: 20px 20px 0 0; }
+    .ai-step { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .ai-step:last-child { border-bottom: none; }
+    .ai-step-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); border: 2px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.7); flex-shrink: 0; }
+    .ai-step-dot.highlight { background: linear-gradient(135deg, var(--teal), var(--teal2)); border-color: var(--teal2); color: #fff; font-size: 0.65rem; box-shadow: 0 0 16px rgba(58,155,142,0.5); }
+    .ai-step-content h4 { color: #fff; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.1rem; }
+    .ai-step-content p { color: rgba(255,255,255,0.55); font-size: 0.82rem; }
+    .ai-step-week { margin-left: auto; font-size: 0.75rem; font-weight: 700; color: var(--teal2); white-space: nowrap; padding-top: 0.1rem; }
+
+    #loopbaan { background: #fff; padding-top: 4rem; }
+    .loopbaan-wat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 4rem; }
+    .loopbaan-wat-item { background: var(--light); border-radius: 14px; padding: 1.5rem; border-left: 4px solid var(--teal); transition: transform 0.2s, box-shadow 0.2s; }
+    .loopbaan-wat-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .loopbaan-wat-item.accent { border-left-color: var(--gold); }
+    .loopbaan-wat-item.accent-green { border-left-color: var(--green1); }
+    .loopbaan-wat-item h4 { font-size: 0.95rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; }
+    .loopbaan-wat-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .investering-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .investering-card { border-radius: 16px; padding: 2.2rem; border: 2px solid var(--border); transition: box-shadow 0.2s; }
+    .investering-card.featured { border-color: var(--teal); background: #f0faf8; }
+    .investering-card label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); display: block; margin-bottom: 0.6rem; }
+    .investering-card .prijs { font-size: 2.6rem; font-weight: 900; color: var(--navy); line-height: 1; }
+    .investering-card .prijs-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+
+    #traject { background: var(--light); padding: 5rem 2rem; }
+    .traject-steps { position: relative; margin-top: 2.5rem; }
+    .traject-steps::before { content: ''; position: absolute; left: 28px; top: 28px; bottom: 28px; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--teal), var(--teal2)); }
+    .traject-step { display: flex; gap: 1.8rem; align-items: flex-start; padding: 1.5rem 0; position: relative; }
+    .tst-dot { width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; color: #fff; z-index: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .tst-dot.s1 { background: var(--gold); color: var(--navy); }
+    .tst-dot.sai { background: linear-gradient(135deg, var(--teal), var(--teal2)); font-size: 0.7rem; font-weight: 800; }
+    .tst-dot.s2 { background: var(--teal); } .tst-dot.s3 { background: var(--green2); } .tst-dot.s4 { background: var(--navy); }
+    .tst-body { background: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; flex: 1; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border-left: 4px solid transparent; transition: box-shadow 0.2s, transform 0.2s; }
+    .tst-body:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1); transform: translateX(4px); }
+    .tst-body h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .tst-body p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+    .tst-week { font-size: 0.78rem; font-weight: 700; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem; }
+    .ai-badge-inline { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(58,155,142,0.12); border: 1px solid rgba(58,155,142,0.35); color: var(--teal); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 99px; margin-bottom: 0.4rem; }
+
+    #gelaagde-leider { background: #fff; }
+    .gl-header { display: grid; grid-template-columns: 1fr; gap: 0; align-items: start; margin-bottom: 3.5rem; }
+    .gl-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .gl-badge { background: var(--light); border: 1px solid var(--border); color: var(--navy); font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 99px; }
+    .fasen-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; align-items: end; }
+    .fase-card { border-radius: 80px 80px 16px 16px; padding: 2.5rem 1.2rem 1.8rem; text-align: center; position: relative; transition: transform 0.25s, box-shadow 0.25s; border: 2px solid transparent; }
+    .fase-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+    .fase-card.f1 { background: #fffbe8; border-color: #e8c020; height: 260px; }
+    .fase-card.f2 { background: #f3f9e8; border-color: #a0c44a; height: 290px; }
+    .fase-card.f3 { background: #e8f8f4; border-color: var(--teal2); height: 320px; }
+    .fase-card.f4 { background: #ddf0ec; border-color: var(--teal); height: 295px; }
+    .fase-card.f5 { background: #eaeef5; border-color: var(--navy); height: 270px; }
+    .fase-icon { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; }
+    .f1 .fase-icon { background: var(--gold); } .f2 .fase-icon { background: #a0c44a; } .f3 .fase-icon { background: var(--teal2); } .f4 .fase-icon { background: var(--teal); } .f5 .fase-icon { background: var(--navy); }
+    .fase-badge { display: inline-block; padding: 0.22rem 0.8rem; border-radius: 99px; font-size: 0.72rem; font-weight: 800; color: #fff; margin-bottom: 0.8rem; }
+    .f1 .fase-badge { background: #d4a520; } .f2 .fase-badge { background: #7aaa2a; } .f3 .fase-badge { background: var(--teal2); } .f4 .fase-badge { background: var(--teal); } .f5 .fase-badge { background: var(--navy); }
+    .fase-card h4 { font-size: 0.9rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.3; }
+    .fase-meta { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    #over { background: var(--navy); overflow: hidden; }
+    .over-inner { display: grid; grid-template-columns: 420px 1fr; gap: 0; align-items: stretch; max-width: 1140px; margin: 0 auto; }
+    .over-img-col { position: relative; overflow: hidden; min-height: 560px; border-radius: 20px 0 0 20px; }
+    .over-img-col img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .over-img-col::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, var(--navy) 100%); }
+    .over-text-col { padding: 4rem 3rem 4rem 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+    #over .section-label { color: var(--gold); } #over .section-label::after { background: var(--gold); }
+    #over h2 { color: #fff; }
+    .over-usp { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+    .over-usp li { display: flex; gap: 0.9rem; align-items: flex-start; color: rgba(255,255,255,0.85); font-size: 0.94rem; line-height: 1.5; }
+    .usp-check { width: 24px; height: 24px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; font-size: 0.7rem; color: #fff; font-weight: 700; }
+    .over-quote { margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.07); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; font-style: italic; color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.7; }
+
+    #kennismaking { background: linear-gradient(135deg, var(--teal) 0%, #2a6b60 50%, var(--teal2) 100%); text-align: center; color: #fff; position: relative; overflow: hidden; }
+    #kennismaking h2 { color: #fff; font-size: clamp(2rem, 3.5vw, 3rem); }
+    #kennismaking .section-label { color: rgba(255,255,255,0.75); justify-content: center; }
+    #kennismaking .section-label::after { display: none; }
+    #kennismaking > .container > p { color: rgba(255,255,255,0.82); font-size: 1.05rem; max-width: 580px; margin: 0 auto 2.5rem; line-height: 1.7; }
+    .kennismaking-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; max-width: 900px; margin: 0 auto 3rem; }
+    .kennismaking-item { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 12px; padding: 1.3rem 1.8rem; transition: background 0.2s, transform 0.2s; }
+    .kennismaking-item:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+    .kennismaking-item h4 { font-weight: 800; color: #fff; font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .kennismaking-item p { color: rgba(255,255,255,0.75); font-size: 0.83rem; }
+
+    #contact { background: var(--light); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+    .contact-info h2 { font-size: 1.9rem; font-weight: 900; color: var(--navy); margin-bottom: 0.8rem; }
+    .contact-info p { color: var(--muted); margin-bottom: 2rem; line-height: 1.7; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: center; background: #fff; border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-decoration: none; color: var(--text); transition: box-shadow 0.2s, transform 0.2s; }
+    .contact-item:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateX(4px); }
+    .contact-item-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-item strong { display: block; font-size: 0.82rem; color: var(--muted); font-weight: 600; margin-bottom: 0.1rem; }
+    .contact-item span { font-size: 0.95rem; color: var(--text); font-weight: 600; }
+    form { background: #fff; padding: 2rem; border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,0.07); display: flex; flex-direction: column; gap: 1rem; }
+    form label { font-size: 0.82rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; display: block; }
+    form input, form textarea, form select { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.95rem; font-family: inherit; transition: border-color 0.2s; background: var(--light); color: var(--text); }
+    form input:focus, form textarea:focus, form select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(45,122,111,0.12); background: #fff; }
+    form textarea { height: 130px; resize: vertical; }
+    form button { background: var(--navy); color: #fff; padding: 1rem 2rem; border-radius: 10px; font-size: 1rem; font-weight: 700; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    form button:hover { background: var(--teal); transform: translateY(-2px); }
+
+    footer { background: #0d2035; color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.85rem; }
+    footer strong { color: rgba(255,255,255,0.9); }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 1000px) {
+      #hero { grid-template-columns: 1fr; } .hero-right { height: 380px; } .hero-left { padding: 4rem 2rem; }
+      .loopbaan-intro-inner { grid-template-columns: 1fr; } .loopbaan-intro-img { height: 300px; }
+      .loopbaanai-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .gl-header { grid-template-columns: 1fr; }
+      .over-inner { grid-template-columns: 1fr; } .over-img-col { min-height: 300px; border-radius: 20px 20px 0 0; }
+      .contact-inner { grid-template-columns: 1fr; } .investering-grid { grid-template-columns: 1fr; }
+      .diensten-grid { grid-template-columns: 1fr; } .fasen-row { grid-template-columns: repeat(3, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 66px; left: 0; right: 0; background: var(--navy2); padding: 1.5rem 2rem; gap: 1.2rem; z-index: 199; }
+      .nav-links.open { display: flex; } .nav-toggle { display: block; }
+    }
+    @media (max-width: 700px) {
+      .fasen-row { grid-template-columns: repeat(2, 1fr); } .fasen-row .fase-card { height: auto !important; }
+      .loopbaan-wat { grid-template-columns: 1fr 1fr; } section { padding: 4rem 1.2rem; }
+    }
+    @media (max-width: 480px) { .loopbaan-wat { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Harold <span>Meeuwsen</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="coaching.html">Voor jou</a></li>
+    <li><a href="teamcoaching.html">Voor teams</a></li>
+    <li><a href="#loopbaan-intro">Voor loopbaan</a></li>
+    <li><a href="gelaagde-leider.html">Voor de leider</a></li>
+    <li><a href="#over">Over Harold</a></li>
+    <li><a href="#kennismaking" class="nav-cta">Kennismaking</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Harold Meeuwsen · Coach &amp; Teamcoach</p>
+    <h1 class="hero-title">Echte verandering<span class="hero-title-accent">komt van binnenuit.</span></h1>
+    <p class="hero-sub">Of je nu vastloopt in je loopbaan, als team niet vooruitkomt of als leider meer impact wilt maken. Ik help je bewegen op de manier die bij jou past. Niet aan de oppervlakte, maar daar waar het echt begint.</p>
+    <div class="hero-actions">
+      <a href="#kennismaking" class="btn-primary">Vrijblijvende kennismaking</a>
+      <a href="#diensten" class="btn-outline">Bekijk diensten</a>
+    </div>
+    <div class="hero-tags">
+      <span class="hero-tag">Coach</span><span class="hero-tag">Teamcoach</span><span class="hero-tag">Loopbaancoach</span><span class="hero-tag">Leiderschapsprogramma</span>
+    </div>
+    <div class="hero-tags" style="margin-top:0.5rem;">
+      <span class="hero-tag">Leger</span><span class="hero-tag">Zorg</span><span class="hero-tag">Consultancy</span><span class="hero-tag">Leiderschap</span>
+    </div>
+  </div>
+  <div class="hero-right"><img src="Boom_website.png" alt="Groei van binnenuit" style="object-position:center bottom;" /></div>
+</section>
+
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item"><div class="stat-num">52u</div><div class="stat-label">Gelaagde Leider programma</div></div>
+    <div class="stat-item"><div class="stat-num">10w</div><div class="stat-label">Loopbaantraject duur</div></div>
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Diensten op maat</div></div>
+    <div class="stat-item"><div class="stat-num">🌍</div><div class="stat-label">Landelijk werkzaam</div></div>
+  </div>
+</div>
+
+<section id="voor-wie">
+  <div class="container">
+    <p class="section-label">Voor jou als je…</p>
+    <h2 class="section-title">Midden in een verandering staat</h2>
+    <p class="section-lead">…in een loopbaantransitie zit, wil begrijpen wat je echt drijft, of wil weten wat jouw volgende juiste stap is.</p>
+    <div class="voor-wie-grid">
+      <div class="voor-wie-card c1"><div class="vwc-icon">🔄</div><h3>Loopbaantransitie</h3><p>Je staat op een kruispunt en wilt de volgende stap bewust zetten — niet zomaar de eerste de beste.</p></div>
+      <div class="voor-wie-card c2"><div class="vwc-icon">🌱</div><h3>Persoonlijke groei</h3><p>Je wilt beter begrijpen wat je drijft, wat energie geeft en wat je tegenhoudt.</p></div>
+      <div class="voor-wie-card c3"><div class="vwc-icon">👥</div><h3>Teamontwikkeling</h3><p>Je wilt als team beter samenwerken, patronen doorbreken en gezamenlijk groeien.</p></div>
+      <div class="voor-wie-card c4"><div class="vwc-icon">🧭</div><h3>Leiderschap</h3><p>Je wilt als teamleider of manager groeien en jouw rol bewuster en effectiever invullen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="diensten">
+  <div class="container">
+    <p class="section-label">Wat ik doe</p>
+    <h2 class="section-title">Diensten</h2>
+    <p class="section-lead">Altijd een vrijblijvende kennismaking. Daarna spreken we samen af wat past — een strippenkaart, een traject of een maatwerkprogramma.</p>
+    <div class="diensten-grid">
+      <a href="coaching.html" class="dienst-card c1"><div class="dienst-icon">🧠</div><h3>Groei van binnenuit. Voor jou.</h3><p>Persoonlijke begeleiding waarbij jij als mens centraal staat. Patronen herkennen, energie en blokkades in kaart brengen. Flexibel via strippenkaart.</p><span class="dienst-link">Lees meer →</span></a>
+      <a href="teamcoaching.html" class="dienst-card c2"><div class="dienst-icon">👥</div><h3>Groei van binnenuit. Voor teams.</h3><p>Begeleiding van teams die vastlopen, in verandering zijn of verder willen groeien. Systemische aanpak: niet alleen symptomen aanpakken, maar het geheel versterken.</p><span class="dienst-link">Lees meer →</span></a>
+      <a href="#loopbaan-intro" class="dienst-card c3"><div class="dienst-icon">🧭</div><h3>Groei van binnenuit. Voor loopbaan.</h3><p>Intensief traject voor professionals in transitie. Van verkenning van wie je bent tot actief solliciteren en begeleiding bij de landing in je nieuwe rol.</p><span class="dienst-link">Bekijk het traject →</span></a>
+      <a href="gelaagde-leider.html" class="dienst-card c4"><div class="dienst-icon">🏆</div><h3>Groei van binnenuit. Voor de leider.</h3><p>Een intensief leiderschapsprogramma van 52 uur, 16 weken en 5 fasen. Voor leiders die merken dat effectief leidinggeven vraagt om meer dan sturen op wat zichtbaar is.</p><span class="dienst-link">Bekijk het programma →</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="loopbaan-intro" style="padding:0;">
+  <div class="loopbaan-intro-inner">
+    <div class="loopbaan-intro-text">
+      <p class="section-label">Loopbaancoaching</p>
+      <h2 class="section-title" style="color:#fff;">Van transitie naar landing</h2>
+      <p class="section-lead">Een intensief traject van 10 weken waarin we samen jouw loopbaanverhaal schrijven — van wie je bent tot de baan die bij je past. Inclusief een unieke <strong style="color:var(--gold);">LoopbaanAI analyse</strong> die jouw rode draad en profiel scherp in beeld brengt.</p>
+      <a href="#loopbaan" class="btn-primary">Bekijk het volledige traject</a>
+    </div>
+    <div class="loopbaan-intro-img"><img src="LoopbaanAI-tool.jpg" alt="LoopbaanAI analyse tool" /></div>
+  </div>
+</section>
+
+<section id="loopbaanai" style="padding:5rem 2rem;">
+  <div class="loopbaanai-inner">
+    <div>
+      <div class="ai-label">LoopbaanAI · Uniek onderdeel</div>
+      <h2>Jouw rode draad, scherp in beeld</h2>
+      <p>De LoopbaanAI analyse is een bijzonder onderdeel van het loopbaantraject. Jij voert in, ik lees mee. Samen brengen we je archetypen, rolprofiel en drijfveren scherp in beeld — zodat je niet gaat zoeken naar een baan, maar naar <em>jouw</em> baan.</p>
+      <p>De uitkomst is een gedetailleerd profiel met hypotheses die jij vervolgens toetst in gesprek, in het netwerk en in sollicitatiegesprekken.</p>
+      <div class="ai-features">
+        <div class="ai-feature"><div class="ai-feature-icon">🎯</div><div><h4>Archetypen &amp; rolprofiel</h4><p>Inzicht in wie je bent en wat je écht drijft, gebaseerd op jouw verhalen en patronen.</p></div></div>
+        <div class="ai-feature"><div class="ai-feature-icon">🔴</div><div><h4>Rode draad helder</h4><p>Wat loopt er door al jouw werkervaring heen? We maken het zichtbaar en voelbaar.</p></div></div>
+        <div class="ai-feature"><div class="ai-feature-icon">💡</div><div><h4>Hypotheses om te toetsen</h4><p>Gerichte aannames die je actief kunt testen — in gesprekken, op LinkedIn en bij werkgevers.</p></div></div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1.5rem;">
+      <div style="position:relative;">
+        <p style="color:rgba(255,255,255,0.45); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.8rem;">De LoopbaanAI tool</p>
+        <img src="LoopbaanAI-tool.jpg" alt="LoopbaanAI analyse tool" style="width:100%; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.5); display:block;" />
+      </div>
+      <div>
+        <p style="color:rgba(255,255,255,0.45); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.8rem;">Jouw persoonlijk dashboard</p>
+        <img src="LoopbaanAI_Dashboard_Preview.png" alt="LoopbaanAI dashboard met voortgang en reflecties" style="width:100%; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.5); display:block;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="loopbaan">
+  <div class="container">
+    <p class="section-label">Wat je krijgt</p>
+    <h2 class="section-title">Alles voor een succesvolle transitie</h2>
+    <div class="loopbaan-wat">
+      <div class="loopbaan-wat-item"><h4>🎯 Persoonlijke coaching</h4><p>Aandacht voor jou als mens. Patronen herkennen, wat geeft energie, wat houdt je tegen.</p></div>
+      <div class="loopbaan-wat-item accent"><h4>🤖 LoopbaanAI analyse</h4><p>Je rode draad, archetypen en rolprofiel scherp in beeld. Hypotheses die jij toetst.</p></div>
+      <div class="loopbaan-wat-item accent-green"><h4>📋 Dashboard op maat</h4><p>Voortgang, doelstellingen, sollicitaties en reflecties altijd inzichtelijk.</p></div>
+      <div class="loopbaan-wat-item accent"><h4>💬 Wekelijkse check-ins</h4><p>Korte online sessies voor voorbereiding, actuele vragen of sollicitatietraining.</p></div>
+      <div class="loopbaan-wat-item"><h4>📍 Coaching op locatie</h4><p>10 sessies van 60 min, persoonlijk en op een vaste plek.</p></div>
+      <div class="loopbaan-wat-item accent-green"><h4>🚀 Begeleiding tot landing</h4><p>Resterende sessies na een nieuwe baan? Gebruik ze voor een succesvolle start.</p></div>
+    </div>
+    <div class="investering-grid">
+      <div class="investering-card"><label>Privébetaler</label><div class="prijs">€ 2.750</div><p class="prijs-sub">Betaling in twee termijnen mogelijk</p></div>
+      <div class="investering-card featured"><label>Via werkgever / outplacement</label><div class="prijs">€ 3.500</div><p class="prijs-sub">Ontwikkelbudget of outplacement, op factuur</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="traject">
+  <div class="container">
+    <p class="section-label">Hoe het traject eruitziet</p>
+    <h2 class="section-title">Stap voor stap naar jouw landing</h2>
+    <div class="traject-steps">
+      <div class="traject-step"><div class="tst-dot s1">1</div><div class="tst-body"><h3>Verkenning</h3><p>Je loopbaanverhaal, patronen en wat je echt zoekt. Doelstellingen voor het traject vastleggen.</p><div class="tst-week">Week 1–2</div></div></div>
+      <div class="traject-step"><div class="tst-dot sai">AI</div><div class="tst-body" style="border-left-color:var(--teal2); background:#f0faf8;"><div class="ai-badge-inline">✦ LoopbaanAI analyse</div><h3>AI-analyse &amp; profiel</h3><p>Jij voert in, Harold leest mee. Je rode draad en profiel scherp in beeld — archetypen, drijfveren, hypotheses.</p><div class="tst-week">Tussen week 2–3</div></div></div>
+      <div class="traject-step"><div class="tst-dot s2">2</div><div class="tst-body"><h3>Verdieping</h3><p>Rapport doorlopen, profiel valideren. Wat klopt, wat verrast, wat stel je bij?</p><div class="tst-week">Week 3–4</div></div></div>
+      <div class="traject-step"><div class="tst-dot s3">3</div><div class="tst-body"><h3>Actie &amp; momentum</h3><p>Positionering, LinkedIn, netwerk, solliciteren. Wekelijkse check-ins houden je op koers.</p><div class="tst-week">Week 5–8</div></div></div>
+      <div class="traject-step"><div class="tst-dot s4">4</div><div class="tst-body"><h3>Landing</h3><p>Afronden, evalueren en begeleid starten in je nieuwe rol. Het traject stopt niet bij het tekenen.</p><div class="tst-week">Week 9–10</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gelaagde-leider">
+  <div class="container">
+    <div class="gl-header">
+      <div>
+        <p class="section-label">Leergang Coachend Leiderschap</p>
+        <h2 class="section-title">De Gelaagde Leider</h2>
+        <p class="section-lead">Deze leergang ondersteunt leidinggevenden in het ontwikkelen van <strong>coachend leiderschap</strong> dat recht doet aan de samenhang tussen organisatie, team en individu.</p>
+        <p style="color:var(--muted); font-size:0.97rem; line-height:1.75; margin-bottom:1.5rem;">De leergang is bedoeld voor leiders die merken dat effectief leidinggeven vraagt om aandacht voor wat zichtbaar is én voor wat <em>onder de oppervlakte</em> meespeelt. Een systemische aanpak op meerdere lagen, met impact — gespreid over <strong>52 uur</strong> en 16 weken in 5 fasen.</p>
+        <div class="gl-badges">
+          <span class="gl-badge">52 uur programma</span><span class="gl-badge">16 weken</span><span class="gl-badge">5 fasen</span><span class="gl-badge">Dagdelen &amp; 1-op-1</span><span class="gl-badge">Systemische aanpak</span><span class="gl-badge">Op maat</span>
+        </div>
+        <div style="margin-top:2rem;"><a href="#kennismaking" class="btn-teal">Vrijblijvend kennismaken</a></div>
+      </div>
+    </div>
+    <div class="fasen-row">
+      <div class="fase-card f1"><div class="fase-icon">📁</div><div class="fase-badge">Fase 1</div><h4>Oriëntatie &amp; Diagnose</h4><p class="fase-meta">Week 1–2<br/>2 dagdelen</p></div>
+      <div class="fase-card f2"><div class="fase-icon">⚖️</div><div class="fase-badge">Fase 2</div><h4>Richting &amp; Positionering</h4><p class="fase-meta">Week 3–4<br/>2 dagdelen</p></div>
+      <div class="fase-card f3"><div class="fase-icon">📈</div><div class="fase-badge">Fase 3</div><h4>Teamontwikkeling</h4><p class="fase-meta">Week 5–9<br/>4 dagdelen</p></div>
+      <div class="fase-card f4"><div class="fase-icon">✅</div><div class="fase-badge">Fase 4</div><h4>Persoonlijk Leiderschap</h4><p class="fase-meta">Week 2–12<br/>12 uur</p></div>
+      <div class="fase-card f5"><div class="fase-icon">📋</div><div class="fase-badge">Fase 5</div><h4>Borging</h4><p class="fase-meta">Week 10–16<br/>2 dagdelen</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="over" style="padding:0;">
+  <div class="over-inner">
+    <div class="over-img-col"><img src="profiel2.jpg" alt="Harold Meeuwsen" /></div>
+    <div class="over-text-col">
+      <p class="section-label">Over Harold</p>
+      <h2 class="section-title" style="color:#fff;">Iedereen heeft de kans om te groeien.</h2>
+      <p style="color:rgba(255,255,255,0.72); font-size:1rem; line-height:1.8; margin-bottom:1.2rem;">Ik heb leidinggegeven in de medische dienst van het leger, gewerkt in de zorg en begeleid in de consultancy. Drie totaal verschillende werelden, met elk hun eigen druk, cultuur en verwachtingen.</p>
+      <p style="color:rgba(255,255,255,0.72); font-size:1rem; line-height:1.8; margin-bottom:1.2rem;">Maar de rode draad was steeds dezelfde. De ander laten groeien en ontwikkelen. Met persoonlijke aandacht voor wat zichtbaar is én voor wat zich onder de oppervlakte afspeelt.</p>
+      <p style="color:rgba(255,255,255,0.72); font-size:1rem; line-height:1.8; margin-bottom:1.2rem;">Wat ik in al die omgevingen heb geleerd: effectieve begeleiding begint altijd bij het kleinste onderdeel van het systeem. De mens. Niet de functie, niet de afdeling, niet de organisatie. Maar de persoon die daarin staat, met alles wat hij of zij meebrengt.</p>
+      <p style="color:rgba(255,255,255,0.72); font-size:1rem; line-height:1.8; margin-bottom:2rem;">Vanuit die overtuiging werk ik nu als coach, teamcoach en begeleider van leidinggevenden. Met een systemische blik die verder kijkt dan het symptoom, en met een aanpak die past bij de situatie. Want wat werkt in het leger werkt niet automatisch in de zorg of in een consultancyomgeving.</p>
+      <ul class="over-usp">
+        <li><span class="usp-check">✓</span>Achtergrond in leger, zorg en consultancy</li>
+        <li><span class="usp-check">✓</span>Systemische blik: niet het symptoom maar de mens centraal</li>
+        <li><span class="usp-check">✓</span>Leidinggevende ervaring in complexe en uiteenlopende omgevingen</li>
+        <li><span class="usp-check">✓</span>Aanpak op maat, want geen situatie is hetzelfde</li>
+        <li><span class="usp-check">✓</span>Altijd een vrijblijvende kennismaking vooraf</li>
+      </ul>
+      <div class="over-quote">"Dat weet ik niet alleen uit theorie. Dat weet ik uit ervaring."</div>
+    </div>
+  </div>
+</section>
+
+<section id="kennismaking">
+  <div class="container" style="position:relative; z-index:2;">
+    <p class="section-label" style="justify-content:center;">Gratis &amp; vrijblijvend</p>
+    <h2 class="section-title" style="color:#fff; text-align:center; margin-bottom:0.8rem;">Laten we kennismaken</h2>
+    <p>Een gesprek van 30 minuten om te kijken of er een match is. Geen verplichtingen, geen verkooppraatje, gewoon een open gesprek over waar jij staat en waar je naartoe wilt.</p>
+    <div class="kennismaking-grid">
+      <div class="kennismaking-item"><h4>Groei van binnenuit. Voor jou.</h4><p>Persoonlijk traject op maat.</p></div>
+      <div class="kennismaking-item"><h4>Groei van binnenuit. Voor teams.</h4><p>Voor teams die willen groeien.</p></div>
+      <div class="kennismaking-item"><h4>Groei van binnenuit. Voor loopbaan.</h4><p>Van transitie naar de juiste landing.</p></div>
+      <div class="kennismaking-item"><h4>Groei van binnenuit. Voor de leider.</h4><p>52-uur leiderschapsprogramma.</p></div>
+    </div>
+    <a href="#contact" class="btn-white">Neem contact op</a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <p class="section-label">Contact</p>
+        <h2>Stuur een bericht</h2>
+        <p>Liever direct mailen of bellen? Dat kan ook. Ik reageer doorgaans binnen één werkdag.</p>
+        <div class="contact-items">
+          <a href="mailto:harold0037@gmail.com" class="contact-item"><div class="contact-item-icon">✉</div><div><strong>E-mail</strong><span>harold0037@gmail.com</span></div></a>
+          <a href="tel:+31653376322" class="contact-item"><div class="contact-item-icon">📞</div><div><strong>Telefoon</strong><span>06 53 37 63 22</span></div></a>
+          <a href="https://groei-vanbinnenuit.nl" target="_blank" class="contact-item"><div class="contact-item-icon">🌐</div><div><strong>Website</strong><span>groei-vanbinnenuit.nl</span></div></a>
+          <div class="contact-item" style="cursor:default;"><div class="contact-item-icon">📍</div><div><strong>Werkgebied</strong><span>Landelijk · online &amp; op locatie</span></div></div>
+        </div>
+      </div>
+      <form onsubmit="handleSubmit(event)">
+        <div><label>Uw naam</label><input type="text" placeholder="Uw volledige naam" required /></div>
+        <div><label>E-mailadres</label><input type="email" placeholder="uw@email.nl" required /></div>
+        <div><label>Waarvoor wilt u een kennismaking?</label>
+          <select><option value="" disabled selected>Kies een dienst</option><option>Individuele coaching</option><option>Teamcoaching / teamsessies</option><option>Adviestraject leren &amp; ontwikkelen</option><option>De Gelaagde Leider (teamleiders)</option><option>Loopbaancoaching (incl. LoopbaanAI)</option><option>Anders / nader te bespreken</option></select>
+        </div>
+        <div><label>Uw bericht (optioneel)</label><textarea placeholder="Vertel kort wat u bezighoudt…"></textarea></div>
+        <button type="submit">Verstuur bericht ✦</button>
+        <p id="form-success" style="display:none; color:var(--teal); font-weight:700;">✓ Bedankt! Ik neem zo snel mogelijk contact met u op.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Harold Meeuwsen</strong> · Coach · Teamcoach · Adviseur Leren &amp; Ontwikkelen · Loopbaancoach</p>
+  <p style="margin-top:0.6rem;">Landelijk werkzaam · © 2026 · <a href="mailto:harold0037@gmail.com">harold0037@gmail.com</a> · <a href="tel:+31653376322">06 53 37 63 22</a> · <a href="https://groei-vanbinnenuit.nl" target="_blank">groei-vanbinnenuit.nl</a></p>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  function handleSubmit(e) { e.preventDefault(); document.getElementById('form-success').style.display = 'block'; e.target.reset(); }
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.voor-wie-card, .dienst-card, .fase-card, .traject-step, .loopbaan-wat-item, .ai-feature').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; el.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; observer.observe(el); });
+</script>
+</body>
+</html>

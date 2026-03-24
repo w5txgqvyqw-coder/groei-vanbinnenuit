@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Individuele Coaching – Harold Meeuwsen</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a2b3c; background: #fff; line-height: 1.6; overflow-x: hidden; }
+    :root {
+      --navy: #1a3a5c; --navy2: #14304e; --teal: #2d7a6f; --teal2: #3a9b8e;
+      --gold: #f0c429;
+      --light: #f5f7fa; --border: #e0e6ed; --text: #334155; --muted: #64748b;
+    }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(20,48,78,0.96); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 66px; box-shadow: 0 2px 20px rgba(0,0,0,0.18); }
+    .nav-logo { color: #fff; font-size: 1.1rem; font-weight: 800; text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--gold) !important; color: var(--navy) !important; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 700 !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; border-radius: 2px; }
+
+    /* BUTTONS */
+    .btn-primary { background: var(--gold); color: var(--navy); padding: 0.9rem 2.1rem; border-radius: 8px; font-weight: 700; font-size: 0.98rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(240,196,41,0.4); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(240,196,41,0.55); }
+    .btn-white { background: #fff; color: var(--teal); padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    /* LAYOUT */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+    .section-label::after { content: ''; flex: 1; max-width: 40px; height: 2px; background: currentColor; border-radius: 2px; }
+    h2.section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: var(--navy); margin-bottom: 1rem; line-height: 1.15; }
+    .section-lead { font-size: 1.05rem; color: var(--muted); max-width: 640px; margin-bottom: 3rem; line-height: 1.7; }
+
+    /* BACK LINK */
+    .back-bar { padding-top: 82px; padding-bottom: 0; background: var(--light); }
+    .back-bar .container { padding: 1rem 0; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--teal); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: gap 0.2s; }
+    .back-link:hover { gap: 0.8rem; }
+
+    /* HERO */
+    #hero { background: linear-gradient(125deg, #0f2540 0%, #1a3a5c 55%, #1e4d6b 100%); padding: 4rem 2rem; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(45,122,111,0.15) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(240,196,41,0.06) 0%, transparent 50%); pointer-events: none; }
+    .hero-inner { max-width: 760px; position: relative; z-index: 2; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--gold); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .hero-eyebrow::before { content: ''; width: 32px; height: 2px; background: var(--gold); border-radius: 2px; }
+    h1.hero-title { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1rem; }
+    .hero-sub { color: rgba(255,255,255,0.75); font-size: 1.1rem; line-height: 1.7; }
+
+    /* VOOR WIE */
+    #voor-wie { background: var(--light); }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .card { background: #fff; border-radius: 16px; padding: 2rem 1.8rem; box-shadow: 0 2px 16px rgba(0,0,0,0.05); border-bottom: 4px solid transparent; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .card.c1:hover { border-color: var(--teal); }
+    .card.c2:hover { border-color: var(--gold); }
+    .card.c3:hover { border-color: var(--navy); }
+    .card-icon { width: 54px; height: 54px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.2rem; }
+    .c1 .card-icon { background: #e8f5f3; }
+    .c2 .card-icon { background: #fdf6d8; }
+    .c3 .card-icon { background: #e8eef5; }
+    .card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+    .card p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+
+    /* AANPAK */
+    #aanpak { background: #fff; }
+    .aanpak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .aanpak-text p { color: var(--text); font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.2rem; }
+    .aanpak-text p:last-child { margin-bottom: 0; }
+    .aanpak-img-col { border-radius: 16px; overflow: hidden; min-height: 340px; }
+    .aanpak-img-col img { width: 100%; height: 100%; min-height: 340px; object-fit: cover; display: block; border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+
+    /* HOE WERKT HET */
+    #hoe-werkt-het { background: var(--light); }
+    .flow-steps { display: flex; flex-direction: column; gap: 0; max-width: 720px; margin: 0 auto; }
+    .flow-step { display: flex; gap: 1.8rem; align-items: flex-start; position: relative; }
+    .flow-step:not(:last-child)::after { content: ''; position: absolute; left: 27px; top: 56px; bottom: -2px; width: 2px; background: linear-gradient(to bottom, var(--teal), var(--teal2)); }
+    .flow-dot { width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.05rem; z-index: 1; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+    .flow-dot.d0 { background: var(--gold); color: var(--navy); }
+    .flow-dot.d1 { background: var(--teal2); color: #fff; }
+    .flow-dot.d2 { background: var(--teal); color: #fff; }
+    .flow-dot.d3 { background: var(--navy); color: #fff; }
+    .flow-body { background: #fff; border-radius: 14px; padding: 1.5rem 1.8rem; flex: 1; margin-bottom: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+    .flow-body:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.09); transform: translateX(4px); }
+    .flow-tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.3rem; }
+    .flow-tag.gratis { color: #27a96c; }
+    .flow-body h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .flow-body p { font-size: 0.91rem; color: var(--muted); line-height: 1.6; }
+
+    /* WAT JE KUNT VERWACHTEN */
+    #verwachten { background: #fff; }
+    .verwachten-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .verwacht-item { background: var(--light); border-radius: 14px; padding: 1.8rem 2rem; border-left: 4px solid var(--teal); display: flex; gap: 1.2rem; align-items: flex-start; transition: transform 0.2s, box-shadow 0.2s; }
+    .verwacht-item:nth-child(even) { border-left-color: var(--gold); }
+    .verwacht-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .verwacht-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+    .verwacht-item h4 { font-size: 0.98rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .verwacht-item p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+    /* CTA */
+    #cta { background: linear-gradient(135deg, var(--teal) 0%, #2a6b60 50%, var(--teal2) 100%); text-align: center; color: #fff; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%); pointer-events: none; }
+    #cta h2 { color: #fff; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; margin-bottom: 1rem; }
+    #cta p { color: rgba(255,255,255,0.82); font-size: 1.05rem; max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.7; }
+
+    /* FOOTER */
+    footer { background: #0d2035; color: rgba(255,255,255,0.55); padding: 2.5rem 2rem; text-align: center; font-size: 0.85rem; }
+    footer strong { color: rgba(255,255,255,0.9); }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .aanpak-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .verwachten-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 66px; left: 0; right: 0; background: var(--navy2); padding: 1.5rem 2rem; gap: 1.2rem; z-index: 199; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      section { padding: 3.5rem 1.2rem; }
+      .flow-steps { padding: 0 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="website-harold.html" class="nav-logo">Harold <span>Meeuwsen</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="coaching.html">Voor jou</a></li>
+    <li><a href="teamcoaching.html">Voor teams</a></li>
+    <li><a href="website-harold.html#loopbaan-intro">Voor loopbaan</a></li>
+    <li><a href="gelaagde-leider.html">Voor de leider</a></li>
+    <li><a href="website-harold.html#over">Over Harold</a></li>
+    <li><a href="website-harold.html#kennismaking" class="nav-cta">Kennismaking</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu openen"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- BACK BAR -->
+<div class="back-bar">
+  <div class="container">
+    <a href="website-harold.html#diensten" class="back-link">← Alle diensten</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Individuele begeleiding</p>
+      <h1 class="hero-title">Individuele coaching</h1>
+      <p class="hero-sub">Persoonlijke begeleiding waarbij jij als mens centraal staat. Niet het probleem, niet de functie – maar wie jij bent en wat jij nodig hebt om te bewegen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VOOR WIE -->
+<section id="voor-wie">
+  <div class="container">
+    <p class="section-label">Herkenbaar?</p>
+    <h2 class="section-title">Voor wie is dit?</h2>
+    <p class="section-lead">Individuele coaching is voor iedereen die op een kruispunt staat, vastloopt of bewuster wil groeien – in werk én in leven.</p>
+    <div class="cards-grid">
+
+      <div class="card c1">
+        <div class="card-icon">🧭</div>
+        <h3>Je zoekt richting</h3>
+        <p>Je weet niet goed wat je volgende stap is. Je voelt dat er iets moet veranderen, maar de weg vooruit is nog niet helder.</p>
+      </div>
+
+      <div class="card c2">
+        <div class="card-icon">🔄</div>
+        <h3>Je loopt vast</h3>
+        <p>Er zijn patronen die je tegenhouden – in je werk, in relaties, in hoe je jezelf neerzet. Je wilt begrijpen waar ze vandaan komen en ze doorbreken.</p>
+      </div>
+
+      <div class="card c3">
+        <div class="card-icon">🌱</div>
+        <h3>Je wilt groeien</h3>
+        <p>Je functioneert goed, maar voelt dat er meer in zit. Je wilt bewuster en effectiever worden – als professional én als mens.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AANPAK -->
+<section id="aanpak">
+  <div class="container">
+    <p class="section-label">Werkwijze</p>
+    <h2 class="section-title">Mijn aanpak</h2>
+    <div class="aanpak-grid">
+      <div class="aanpak-text">
+        <p>Ik werk vanuit een <strong>systemische blik</strong>: ik kijk niet alleen naar het probleem dat je beschrijft, maar naar het bredere systeem waarin jij functioneert. Jouw werk, je thuis, je geschiedenis, je patronen – al die lagen spelen mee.</p>
+        <p>Dat betekent aandacht voor het <strong>geheel</strong>, niet alleen voor het symptoom. Soms ligt de sleutel op een heel andere plek dan je verwacht.</p>
+        <p>Jij als mens staat centraal. Niet je functietitel, niet je cv – maar wie jij bent, wat je beweegt en wat je nodig hebt. Van daaruit werken we aan concrete stappen die echt bij je passen.</p>
+      </div>
+      <div class="aanpak-img-col">
+        <img src="in gesprek_website.png" alt="Coach en cliënt in gesprek" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOE WERKT HET -->
+<section id="hoe-werkt-het">
+  <div class="container">
+    <p class="section-label">Traject</p>
+    <h2 class="section-title">Hoe werkt het?</h2>
+    <p class="section-lead">Coaching op basis van een strippenkaart: flexibel en op maat, zonder verplichtingen vooraf.</p>
+
+    <div class="flow-steps">
+
+      <div class="flow-step">
+        <div class="flow-dot d0">✦</div>
+        <div class="flow-body">
+          <p class="flow-tag gratis">Gratis · vrijblijvend</p>
+          <h3>Vrijblijvende kennismaking</h3>
+          <p>We maken kennis via een kort gesprek – online of telefonisch. Je stelt je vraag, ik leg uit hoe ik werk. Geen verplichtingen, geen kosten.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-dot d1">1</div>
+        <div class="flow-body">
+          <p class="flow-tag">Eerste gesprek</p>
+          <h3>Kennismakingsgesprek</h3>
+          <p>Een dieper intakegesprek van 60–90 minuten. We brengen in kaart wat er speelt, wat jij nodig hebt en of er een klik is om samen aan de slag te gaan.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-dot d2">2</div>
+        <div class="flow-body">
+          <p class="flow-tag">Start</p>
+          <h3>Basispakket sessies afspreken</h3>
+          <p>Op basis van het gesprek spreken we een basispakket af – een aantal sessies dat past bij jouw vraag en tempo. Duidelijke afspraken, geen verrassingen.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-dot d3">3</div>
+        <div class="flow-body">
+          <p class="flow-tag">Flexibel vervolg</p>
+          <h3>Uitbreiden via strippenkaart</h3>
+          <p>Heb je meer of minder nodig dan verwacht? Geen probleem. Je kunt eenvoudig extra sessies bijboeken of het traject afronden als je er klaar voor bent.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAT JE KUNT VERWACHTEN -->
+<section id="verwachten">
+  <div class="container">
+    <p class="section-label">Resultaten</p>
+    <h2 class="section-title">Wat je kunt verwachten</h2>
+    <p class="section-lead">Geen garanties voor snelle oplossingen, wel concrete beweging in de dingen die er voor jou toe doen.</p>
+    <div class="verwachten-grid">
+
+      <div class="verwacht-item">
+        <div class="verwacht-icon">🔍</div>
+        <div>
+          <h4>Inzicht in patronen</h4>
+          <p>Je begrijpt beter waarom je doet wat je doet – en wat je daarin kunt veranderen.</p>
+        </div>
+      </div>
+
+      <div class="verwacht-item">
+        <div class="verwacht-icon">⚡</div>
+        <div>
+          <h4>Meer energie & focus</h4>
+          <p>Minder energie kwijt aan rondjes draaien, meer ruimte voor wat echt belangrijk is.</p>
+        </div>
+      </div>
+
+      <div class="verwacht-item">
+        <div class="verwacht-icon">🎯</div>
+        <div>
+          <h4>Helder beeld van wat jij wilt</h4>
+          <p>Je weet weer wat je wilt, wat bij je past en welke richting goed voelt.</p>
+        </div>
+      </div>
+
+      <div class="verwacht-item">
+        <div class="verwacht-icon">🪜</div>
+        <div>
+          <h4>Concrete stappen vooruit</h4>
+          <p>Niet alleen inzichten, maar ook handelingsperspectief: jij weet wat je gaat doen.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <h2>Klaar voor een eerste gesprek?</h2>
+    <p>Een vrijblijvende kennismaking is gratis en zonder verplichtingen. We kijken samen of er een match is.</p>
+    <a href="website-harold.html#kennismaking" class="btn-white">Plan een kennismaking</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Harold Meeuwsen</strong> · Coach | Teamcoach | Loopbaancoach</p>
+  <p style="margin-top:0.5rem;"><a href="website-harold.html">Home</a> &nbsp;·&nbsp; <a href="website-harold.html#diensten">Diensten</a> &nbsp;·&nbsp; <a href="website-harold.html#over">Over Harold</a> &nbsp;·&nbsp; <a href="website-harold.html#kennismaking">Kennismaking</a></p>
+  <p style="margin-top:0.8rem;">© 2025 groei-vanbinnenuit.nl</p>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+</script>
+
+</body>
+</html>
